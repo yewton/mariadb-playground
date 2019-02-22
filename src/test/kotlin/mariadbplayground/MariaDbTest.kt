@@ -26,9 +26,11 @@ object MariaDbTest : Spek({
             DriverManager.getConnection(url, dbUser, dbPass).use { conn ->
                 conn.isReadOnly = i % 2 == 1
                 conn.createStatement().use { st ->
-                    st.executeQuery("SELECT @@hostname").use {
-                        it.next()
-                        println("$i${if (conn.isReadOnly) "(ReadOnly)" else ""}: ${it.getString(1)}");
+                    repeat(2) { j ->
+                        st.executeQuery("SELECT @@hostname").use {
+                            it.next()
+                            println("$i-$j${if (conn.isReadOnly) "(ReadOnly)" else ""}: ${it.getString(1)}")
+                        } // SET BREAKPOINT HERE TO SEE FAILOVER BEHAVIOR
                     }
                 }
             }
@@ -59,6 +61,9 @@ object MariaDbTest : Spek({
         }
         it("replication") {
             assertEquals("hoge", runTest("replication", "hoge"))
+        }
+        it("none") {
+            assertEquals("hoge", runTest("none", "hoge"))
         }
     }
 })

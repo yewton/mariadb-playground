@@ -27,58 +27,123 @@ docker-compose up -d
 ```
 mariadbplayground.MariaDbTest > loadbalance STANDARD_OUT
     jdbc:mariadb:loadbalance://127.0.0.1:13306,127.0.0.1:13307,127.0.0.1:13308/test
-    0: db1
-    1(ReadOnly): db1
-    2: db1
-    3(ReadOnly): db3
-    4: db2
-    5(ReadOnly): db2
-    6: db1
-    7(ReadOnly): db2
-    8: db3
-    9(ReadOnly): db1
+    0-0: db3
+    0-1: db3
+    1-0(ReadOnly): db2
+    1-1(ReadOnly): db2
+    2-0: db3
+    2-1: db3
+    3-0(ReadOnly): db3
+    3-1(ReadOnly): db3
+    4-0: db1
+    4-1: db1
+    5-0(ReadOnly): db3
+    5-1(ReadOnly): db3
+    6-0: db2
+    6-1: db2
+    7-0(ReadOnly): db3
+    7-1(ReadOnly): db3
+    8-0: db2
+    8-1: db2
+    9-0(ReadOnly): db1
+    9-1(ReadOnly): db1
 
 mariadbplayground.MariaDbTest > failover STANDARD_OUT
     jdbc:mariadb:failover://127.0.0.1:13306,127.0.0.1:13307,127.0.0.1:13308/test
-    0: db3
-    1: db3
-    2: db1
-    3: db3
-    4: db2
-    5: db2
-    6: db1
-    7: db1
-    8: db2
-    9: db2
+    0-0: db2
+    0-1: db2
+    1-0: db3
+    1-1: db3
+    2-0: db3
+    2-1: db3
+    3-0: db3
+    3-1: db3
+    4-0: db2
+    4-1: db2
+    5-0: db2
+    5-1: db2
+    6-0: db1
+    6-1: db1
+    7-0: db1
+    7-1: db1
+    8-0: db3
+    8-1: db3
+    9-0: db3
+    9-1: db3
 
 mariadbplayground.MariaDbTest > sequential STANDARD_OUT
     jdbc:mariadb:sequential://127.0.0.1:13306,127.0.0.1:13307,127.0.0.1:13308/test
-    0: db1
-    1: db1
-    2: db1
-    3: db1
-    4: db1
-    5: db1
-    6: db1
-    7: db1
-    8: db1
-    9: db1
+    0-0: db1
+    0-1: db1
+    1-0: db1
+    1-1: db1
+    2-0: db1
+    2-1: db1
+    3-0: db1
+    3-1: db1
+    4-0: db1
+    4-1: db1
+    5-0: db1
+    5-1: db1
+    6-0: db1
+    6-1: db1
+    7-0: db1
+    7-1: db1
+    8-0: db1
+    8-1: db1
+    9-0: db1
+    9-1: db1
 
 mariadbplayground.MariaDbTest > replication STANDARD_OUT
     jdbc:mariadb:replication://127.0.0.1:13306,127.0.0.1:13307,127.0.0.1:13308/test
-    0: db1
-    1(ReadOnly): db2
-    2: db1
-    3(ReadOnly): db2
-    4: db1
-    5(ReadOnly): db2
-    6: db1
-    7(ReadOnly): db3
-    8: db1
-    9(ReadOnly): db3
+    0-0: db1
+    0-1: db1
+    1-0(ReadOnly): db2
+    1-1(ReadOnly): db2
+    2-0: db1
+    2-1: db1
+    3-0(ReadOnly): db2
+    3-1(ReadOnly): db2
+    4-0: db1
+    4-1: db1
+    5-0(ReadOnly): db2
+    5-1(ReadOnly): db2
+    6-0: db1
+    6-1: db1
+    7-0(ReadOnly): db3
+    7-1(ReadOnly): db3
+    8-0: db1
+    8-1: db1
+    9-0(ReadOnly): db2
+    9-1(ReadOnly): db2
 
-Gradle Test Executor 16 finished executing tests.
+mariadbplayground.MariaDbTest > none STANDARD_OUT
+    jdbc:mariadb:none://127.0.0.1:13306,127.0.0.1:13307,127.0.0.1:13308/test
+    0-0: db1
+    0-1: db1
+    1-0(ReadOnly): db1
+    1-1(ReadOnly): db1
+    2-0: db1
+    2-1: db1
+    3-0(ReadOnly): db1
+    3-1(ReadOnly): db1
+    4-0: db1
+    4-1: db1
+    5-0(ReadOnly): db1
+    5-1(ReadOnly): db1
+    6-0: db1
+    6-1: db1
+    7-0(ReadOnly): db1
+    7-1(ReadOnly): db1
+    8-0: db1
+    8-1: db1
+    9-0(ReadOnly): db1
+    9-1(ReadOnly): db1
+
+Gradle Test Executor 17 finished executing tests.
 ```
+
+You can check failover behavior by setting a breakpoint nd `docker-compose stop dbX` . 
 
 Links
 ----
