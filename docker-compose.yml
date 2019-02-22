@@ -1,0 +1,40 @@
+version: '3'
+services:
+  db1: &db_common
+    image: mariadb:10.3
+    hostname: db1
+    ports:
+      - '13306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_INITDB_SKIP_TZINFO=yes
+    volumes:
+      - db1:/var/lib/mysql
+      - ./mysql.conf.d:/etc/mysql/conf.d
+    networks:
+      - db
+    command: mysqld --wsrep-new-cluster
+  db2:
+    <<: *db_common
+    hostname: db2
+    ports:
+      - '13307:3306'
+    volumes:
+      - db2:/var/lib/mysql
+      - ./mysql.conf.d:/etc/mysql/conf.d
+    command: mysqld
+  db3:
+    <<: *db_common
+    hostname: db3
+    ports:
+      - '13308:3306'
+    volumes:
+      - db3:/var/lib/mysql
+      - ./mysql.conf.d:/etc/mysql/conf.d
+    command: mysqld
+volumes:
+  db1:
+  db2:
+  db3:
+networks:
+  db:
